@@ -1,11 +1,11 @@
-FROM debian:buster
+FROM debian:bullseye
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
         groff \
         less \
  && rm -rf /var/lib/apt/lists/*
 
-COPY --from=amazon/aws-cli:2.1.10 /usr/local/aws-cli/v2/current /usr/local
+COPY --from=amazon/aws-cli:2.4.27 /usr/local/aws-cli/v2/current /usr/local
 
 RUN addgroup --gid 1000 aws \
  && adduser \
