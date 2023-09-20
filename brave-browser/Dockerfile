@@ -1,4 +1,4 @@
-FROM debian:sid-slim
+FROM debian:11.3-slim
 
 # Install brave-browser
 RUN apt-get update \
@@ -16,8 +16,8 @@ RUN apt-get update \
         libpulse0 \
         libv4l-0 \
         --no-install-recommends \
- && curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add - \
- && echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ bionic main" >> /etc/apt/sources.list.d/brave-browser-release-bionic.list \
+ && curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg \
+ && echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" > /etc/apt/sources.list.d/brave-browser-release.list \
  && apt-get update \
  && apt-get install -y \
         brave-browser \
